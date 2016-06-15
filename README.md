@@ -5,7 +5,16 @@
 ###### Installation
     
     go get github.com/leonlau/fonts
+ 
+###### Usage
+
+```go
+import "github.com/leonlau/fonts"
+data, err := fonts.LoadFont("Times New Roman")
+...
+```
+
     
-## LICENSE
+###### LICENSE
 
 fonts source code is licensed under The MIT License
