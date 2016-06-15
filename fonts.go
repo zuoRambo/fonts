@@ -4,8 +4,9 @@ import (
 	"os"
 	"fmt"
 	"io/ioutil"
+	"io"
 )
-
+// AppendPath append search path
 func AppendPath(path string) {
 	for _, p := range FontPaths {
 		if p == path {
@@ -14,7 +15,7 @@ func AppendPath(path string) {
 	}
 	FontPaths = append(FontPaths, path);
 }
-
+// AppendValidExt append match ext
 func AppendValidExt(ext string) {
 	for _, ve := range ValidExt {
 		if ve == ext {
@@ -25,8 +26,16 @@ func AppendValidExt(ext string) {
 }
 
 var ValidExt = []string{"ttf", "ttc"}
-
+// LoadFont
 func LoadFont(fontName string) ([]byte, error) {
+	r, e := ReadFont(fontName)
+	if e != nil {
+		return nil, e
+	}
+	return ioutil.ReadAll(r);
+}
+
+func ReadFont(fontName string) (io.Reader, error) {
 	for _, p := range FontPaths {
 		for _, ext := range ValidExt {
 			matches, err := filepath.Glob(os.ExpandEnv(p) + fontName + "." + ext)
@@ -34,7 +43,7 @@ func LoadFont(fontName string) ([]byte, error) {
 				return nil, err
 			}
 			for _, match := range matches {
-				return ioutil.ReadFile(match)
+				return os.Open(match)
 			}
 		}
 	}
