@@ -25,7 +25,7 @@ func AppendValidExt(ext string) {
 	ValidExt = append(ValidExt, ext);
 }
 
-var ValidExt = []string{"ttf", "ttc"}
+var ValidExt = []string{"ttf"}
 // LoadFont
 func LoadFont(fontName string) ([]byte, error) {
 	r, e := ReadFont(fontName)
