@@ -4,7 +4,6 @@ import (
 	"os"
 	"fmt"
 	"io/ioutil"
-	"io"
 )
 // AppendPath append search path
 func AppendPath(path string) {
@@ -28,14 +27,15 @@ func AppendValidExt(ext string) {
 var ValidExt = []string{"ttf"}
 // LoadFont
 func LoadFont(fontName string) ([]byte, error) {
-	r, e := ReadFont(fontName)
+	f, e := ReadFont(fontName)
 	if e != nil {
 		return nil, e
 	}
-	return ioutil.ReadAll(r);
+	defer f.Close()
+	return ioutil.ReadAll(f);
 }
 
-func ReadFont(fontName string) (io.Reader, error) {
+func ReadFont(fontName string) (*os.File, error) {
 	for _, p := range FontPaths {
 		for _, ext := range ValidExt {
 			matches, err := filepath.Glob(os.ExpandEnv(p) + fontName + "." + ext)
