@@ -23,6 +23,10 @@ func AppendValidExt(ext string) {
 	}
 	ValidExt = append(ValidExt, ext);
 }
+// Only Search path
+func OnlyPath(path string) {
+	FontPaths = []string{path};
+}
 
 var ValidExt = []string{"ttf"}
 // LoadFont
