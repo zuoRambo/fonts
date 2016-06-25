@@ -1,4 +1,4 @@
-## fonts
+## fonts [![LICENSE](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/leonlau/fonts/blob/master/LICENSE)
     a cross-platform way to load font data
     
 
