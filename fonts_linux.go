@@ -1,4 +1,5 @@
 package fonts
+
 var FontPaths = []string{
 	"$HOME/.fonts/**/*",
 	"/usr/local/share/fonts/**/*",

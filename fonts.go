@@ -1,34 +1,39 @@
 package fonts
+
 import (
-	"path/filepath"
-	"os"
 	"fmt"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 )
+
 // AppendPath append search path
 func AppendPath(path string) {
 	for _, p := range FontPaths {
 		if p == path {
-			return;
+			return
 		}
 	}
-	FontPaths = append(FontPaths, path);
+	FontPaths = append(FontPaths, path)
 }
+
 // AppendValidExt append match ext
 func AppendValidExt(ext string) {
 	for _, ve := range ValidExt {
 		if ve == ext {
-			return;
+			return
 		}
 	}
-	ValidExt = append(ValidExt, ext);
+	ValidExt = append(ValidExt, ext)
 }
+
 // Only Search path
 func OnlyPath(path string) {
-	FontPaths = []string{path};
+	FontPaths = []string{path}
 }
 
 var ValidExt = []string{"ttf"}
+
 // LoadFont
 func LoadFont(fontName string) ([]byte, error) {
 	f, e := ReadFont(fontName)
@@ -36,7 +41,7 @@ func LoadFont(fontName string) ([]byte, error) {
 		return nil, e
 	}
 	defer f.Close()
-	return ioutil.ReadAll(f);
+	return ioutil.ReadAll(f)
 }
 
 func ReadFont(fontName string) (*os.File, error) {
@@ -53,4 +58,3 @@ func ReadFont(fontName string) (*os.File, error) {
 	}
 	return nil, fmt.Errorf("Font '%s' not found.", fontName)
 }
-
